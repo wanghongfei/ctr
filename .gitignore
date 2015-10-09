@@ -1,0 +1,16 @@
+.idea/
+*.iml
+*.bak
+target/
+*.bak
+.imdone/
+logs/
+
+.settings/
+deploy.sh
+**/*.swp
+**/*.swo
+**/*.swl
+**/*.swm
+**/*.swn
+**/*.DS_Store
