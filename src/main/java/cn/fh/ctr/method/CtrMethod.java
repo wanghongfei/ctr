@@ -36,6 +36,16 @@ public class CtrMethod {
     }
 
     /**
+     * 构造一个方法对象
+     * @param method 实际要调用的目标方法
+     * @param handler 目标方法所在的对象
+     */
+    public CtrMethod(Method method, Object handler) {
+        this.method = method;
+        this.handler = handler;
+    }
+
+    /**
      * 调用该方法
      * @param map
      * @return 返回该方法调用的返回值
