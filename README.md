@@ -14,7 +14,7 @@ Ctr主要用来解决从HTTP请求到Java方法之间的映射问题。由于Jav
 
 `请求` - `方法`映射由`Dispatcher`类负责处理，`CtrMethod`是对`java.lang.reflect.Method`类的封装。
 
-如，对于URI`/hello`, 需要调用`TestBean#print()`方法：
+如，对于URI`/hello`, 需要调用`TestBean#print()`方法，类似于SpringMVC中的`@RequestMapping`, 我们**对目标方法(即`TestBean#print()`)签名没有任何要求，可以无参，也可以有多个参数**。框架在调用目标方法时，会自动查找方法形参中有没有`Map<String, String>`类型的参数，如果有则注入，没有也不会报错。
 
 ``` java
 Method[] methods = TestBean.class.getDeclaredMethods();
