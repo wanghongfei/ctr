@@ -1,5 +1,7 @@
 package cn.fh.ctr.method;
 
+import cn.fh.ctr.exception.BaseCtrException;
+import cn.fh.ctr.exception.MethodInvocationException;
 import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.InvocationTargetException;
@@ -38,7 +40,7 @@ public class CtrMethod {
      * @param map
      * @return 返回该方法调用的返回值
      */
-    public Object invoke(Map<String, String> map) {
+    public Object invoke(Map<String, String> map) throws BaseCtrException {
 
         try {
             Object[] params = makeParameters(map);
@@ -46,13 +48,14 @@ public class CtrMethod {
 
         } catch (IllegalAccessException e) {
             e.printStackTrace();
+            throw new MethodInvocationException();
 
         } catch (InvocationTargetException e) {
             e.printStackTrace();
+            throw new MethodInvocationException();
 
         }
 
-        return null;
     }
 
     /**

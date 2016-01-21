@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class InvokeTest {
     @Test
-    public void test() {
+    public void test() throws Exception {
         Method[] methods = TestBean.class.getDeclaredMethods();
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext("root-context.xml");

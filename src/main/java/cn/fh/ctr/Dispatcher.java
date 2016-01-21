@@ -1,5 +1,6 @@
 package cn.fh.ctr;
 
+import cn.fh.ctr.exception.BaseCtrException;
 import cn.fh.ctr.method.CtrMethod;
 
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class Dispatcher {
      * @param paramMap web请求参数
      * @return
      */
-    public Object invoke(String url, Map<String, String> paramMap) {
+    public Object invoke(String url, Map<String, String> paramMap) throws BaseCtrException {
         CtrMethod method = reqMap.get(url);
         return method.invoke(paramMap);
     }
