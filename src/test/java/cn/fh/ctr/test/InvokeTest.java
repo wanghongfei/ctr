@@ -20,7 +20,8 @@ public class InvokeTest {
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext("root-context.xml");
         Dispatcher dispatcher = new Dispatcher(10);
-        dispatcher.register("/hello", new CtrMethod("testBean", methods[0], ctx));
+        //dispatcher.register("/hello", new CtrMethod("testBean", methods[0], ctx));
+        dispatcher.register(new CtrMethod(methods[0], new TestBean()) );
 
         Map<String, String> map = new HashMap<>();
         map.put("hello", "whf");

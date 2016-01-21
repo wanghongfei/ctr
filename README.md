@@ -21,9 +21,9 @@ Method[] methods = TestBean.class.getDeclaredMethods();
 
 // 构造Dispatcher对象
 Dispatcher dispatcher = new Dispatcher(10);
-// 注册URL到方法的映射
+// 注册方法映射
 // methods[0]就是print()方法
-dispatcher.register("/hello", new CtrMethod(methods[0], new TestBean()) );
+dispatcher.register(new CtrMethod(methods[0], new TestBean()) );
 
 // 构造请求参数
 Map<String, String> map = new HashMap<>();
@@ -32,5 +32,21 @@ map.put("hello", "whf");
 // 调用/hello对应的方法
 // map中包含请求参数
 dispatcher.invoke("/hello", map);
+```
+
+`TestBean类`:
+
+``` java
+public class TestBean {
+    @ReqMap("/hello")
+    public void print(Object o, Map<String, String> map, Integer obj) {
+        System.out.println("print!!!");
+
+      	// 打印请求参数
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println("key = " + entry.getKey() + ", val = " + entry.getValue());
+        }
+    }
+}
 ```
 

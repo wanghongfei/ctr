@@ -1,6 +1,8 @@
 package cn.fh.ctr;
 
+import cn.fh.ctr.annotation.ReqMap;
 import cn.fh.ctr.exception.BaseCtrException;
+import cn.fh.ctr.exception.NoMappingException;
 import cn.fh.ctr.method.CtrMethod;
 
 import java.util.HashMap;
@@ -21,8 +23,30 @@ public class Dispatcher {
         this(50);
     }
 
+    /**
+     * 注册一个 请求-方法映射.
+     * 指定Method对应的URL，此时忽略Method上的注解
+     * @param url
+     * @param method
+     */
     public void register(String url, CtrMethod method) {
         reqMap.put(url, method);
+    }
+
+    /**
+     * 注册一个 请求-方法映射.
+     * 请求URL由方法上的注解决定
+     * @param ctrMethod
+     */
+    public void register(CtrMethod ctrMethod) {
+        ReqMap mapInfo = ctrMethod.parseAnnotation();
+
+        String url = "/";
+        if (null != mapInfo) {
+            url = mapInfo.value();
+        }
+
+        register(url, ctrMethod);
     }
 
     /**
@@ -33,6 +57,10 @@ public class Dispatcher {
      */
     public Object invoke(String url, Map<String, String> paramMap) throws BaseCtrException {
         CtrMethod method = reqMap.get(url);
+        if (null == method) {
+            throw new NoMappingException("no mapping for " + url);
+        }
+
         return method.invoke(paramMap);
     }
 }

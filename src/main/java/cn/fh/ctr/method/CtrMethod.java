@@ -1,5 +1,6 @@
 package cn.fh.ctr.method;
 
+import cn.fh.ctr.annotation.ReqMap;
 import cn.fh.ctr.exception.BaseCtrException;
 import cn.fh.ctr.exception.MethodInvocationException;
 import org.springframework.context.ApplicationContext;
@@ -43,6 +44,10 @@ public class CtrMethod {
     public CtrMethod(Method method, Object handler) {
         this.method = method;
         this.handler = handler;
+    }
+
+    public ReqMap parseAnnotation() {
+        return this.method.getAnnotation(ReqMap.class);
     }
 
     /**
